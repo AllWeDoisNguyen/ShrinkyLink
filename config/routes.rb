@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :links, only: [:show, :new, :create]
 
+  # post 'links/create' => 'links#create'
+  # get ':id' => 'links#show'
+  get 'alt/:short_url' => 'links#show_alt'
+
   root to: redirect('/links/new')
 
   # The priority is based upon order of creation: first created -> highest priority.

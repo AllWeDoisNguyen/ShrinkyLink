@@ -7,12 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if flash[:short_url_id].present? %>
+<% if flash[:link_id].present? %>
 	<p class="shortlink" >
-		The Shrinky Link is available <%= link_to 'here', link_path(flash[:short_url_id]) %>. (Right click and copy link to share it.) </p>
+		The Shrinky Link is available <%= link_to 'here', link_path(flash[:link_id]) %>. (Right click and copy link to share it.) </p>
 		<% end %>
 
 <%= yield %>
+
+<p>Your Shrinky Link: <%= Link.all.last.short_url %></p>
+
+
+<p>See past links Shrinkied Before!</p>
 
 </body>
 </html>
