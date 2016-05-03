@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
-	attr_accessor :short_url, :link
+  before_action :params_permit, only: [:new] 
+	
 
   def index
   	@links = Link.all	
@@ -10,7 +11,7 @@ class LinksController < ApplicationController
   end
 
   def create
-  	@link = Link.new(params.require(:link).permit(:link, :short_url))
+  	@link = Link.new link_params
   	@link.short_url = root_url + rand(36**4).to_s(36)
   	if @link.save
   		flash[:link_id] = @link.id
@@ -25,9 +26,15 @@ class LinksController < ApplicationController
   	redirect_to @link.link
   end
 
-  def show_alt
-  	@link = Link.find(params[:alt])
-  	redirect_to @link.link
+
+  private
+
+  def link_params
+    params.require(:link).permit(:link, :short_url)
+  end
+
+  def params_permit
+    params.permit(:show_all)
   end
 
 

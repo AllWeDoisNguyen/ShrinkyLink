@@ -21,3 +21,12 @@
   </p>
 
 <% end %>
+
+<p>See past links Shrinkied Before! <%= link_to 'Shrinkied Links', new_link_path(show_all: "true") %></p>
+    <% if params[:show_all] %>
+      <% Link.all.each do |the_url| %>
+        <div>
+          <%= the_url.link %> + <%= the_url.short_url %> 
+        </div>
+      <% end %>
+    <% end %>
